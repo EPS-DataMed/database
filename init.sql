@@ -1,10 +1,6 @@
-CREATE DATABASE IF NOT EXISTS 'Datamed';
-
-USE 'Datamed';
-
 CREATE TYPE status AS ENUM('Preenchido', 'Em andamento', 'Não iniciado');
 
-CREATE TABLE Paciente (
+CREATE TABLE IF NOT EXISTS Paciente (
   id_usuario SERIAL PRIMARY KEY NOT NULL,
   formulario JSONB,
   status_formulario status NOT NULL,
@@ -19,7 +15,7 @@ CREATE TABLE Paciente (
       REFERENCES Paciente(id_usuario)
 );
 
-CREATE TABLE Medico (
+CREATE TABLE IF NOT EXISTS Medico (
   id_usuario SERIAL PRIMARY KEY NOT NULL,
   crm VARCHAR (9) UNIQUE NOT NULL,
   especialidade VARCHAR (50) NOT NULL,
@@ -30,7 +26,7 @@ CREATE TABLE Medico (
   criado_em DATE NOT NULL
 );
 
-CREATE TABLE Exames (
+CREATE TABLE IF NOT EXISTS Exames (
   id_exame SERIAL PRIMARY KEY NOT NULL,
   nome VARCHAR (50),
   arquivo BYTEA NOT NULL,
@@ -41,7 +37,7 @@ CREATE TABLE Exames (
       REFERENCES Paciente(id_usuario)
 );
 
-CREATE TABLE atende (
+CREATE TABLE IF NOT EXISTS atende (
   id_medico INT NOT NULL,
   id_paciente INT NOT NULL,
   CONSTRAINT fk_medico
@@ -50,4 +46,4 @@ CREATE TABLE atende (
   CONSTRAINT fk_paciente
    FOREIGN KEY (id_paciente)
      REFERENCES Paciente(id_usuario)
-)
+);
