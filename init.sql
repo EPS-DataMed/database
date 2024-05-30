@@ -1,49 +1,40 @@
-CREATE TYPE status AS ENUM('Preenchido', 'Em andamento', 'Não iniciado');
-
-CREATE TABLE IF NOT EXISTS Paciente (
-  id_usuario SERIAL PRIMARY KEY NOT NULL,
-  formulario JSONB,
-  status_formulario status NOT NULL,
-  email VARCHAR (50) UNIQUE NOT NULL,
-  senha VARCHAR (50) NOT NULL,
-  nome VARCHAR (50) NOT NULL,
-  dt_nascimentO DATE NOT NULL,
-  criado_em DATE NOT NULL,
-  id_responsavel INT,
-  CONSTRAINT fk_responsavel
-    FOREIGN KEY (id_responsavel)
-      REFERENCES Paciente(id_usuario)
+-- Criação da tabela de usuário
+CREATE TABLE Usuario (
+    id SERIAL PRIMARY KEY,
+    nome_completo VARCHAR(255) NOT NULL,
+    email VARCHAR(255) UNIQUE NOT NULL,
+    senha VARCHAR(255) NOT NULL,
+    data_nascimento DATE NOT NULL,
+    sexo_biologico CHAR(1) CHECK (sexo_biologico IN ('M', 'F')),
+    data_criacao TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    formulario JSONB,
+    status_formulario VARCHAR(20) CHECK (status_formulario IN ('Preenchido', 'Em andamento', 'Não iniciado')) DEFAULT 'Não iniciado'
 );
 
-CREATE TABLE IF NOT EXISTS Medico (
-  id_usuario SERIAL PRIMARY KEY NOT NULL,
-  crm VARCHAR (9) UNIQUE NOT NULL,
-  especialidade VARCHAR (50) NOT NULL,
-  email VARCHAR (50) NOT NULL,
-  senha VARCHAR (50) NOT NULL,
-  nome VARCHAR (50) NOT NULL,
-  dt_nascimento DATE NOT NULL,
-  criado_em DATE NOT NULL
+-- Criação da tabela de médico
+CREATE TABLE Medico (
+    id_usuario INT PRIMARY KEY,
+    crm VARCHAR(50) NOT NULL,
+    especialidade VARCHAR(255) NOT NULL,
+    FOREIGN KEY (id_usuario) REFERENCES Usuario(id)
 );
 
-CREATE TABLE IF NOT EXISTS Exames (
-  id_exame SERIAL PRIMARY KEY NOT NULL,
-  nome VARCHAR (50),
-  arquivo BYTEA NOT NULL,
-  data_adicao DATE NOT NULL,
-  id_usuario INT NOT NULL,
-  CONSTRAINT fk_usuario
-    FOREIGN KEY (id_usuario)
-      REFERENCES Paciente(id_usuario)
+-- Criação da tabela de dependentes
+CREATE TABLE Dependente (
+    id_usuario INT,
+    id_dependente INT,
+    confirmado BOOLEAN DEFAULT FALSE,
+    PRIMARY KEY (id_usuario, id_dependente),
+    FOREIGN KEY (id_usuario) REFERENCES Usuario(id),
+    FOREIGN KEY (id_dependente) REFERENCES Usuario(id)
 );
 
-CREATE TABLE IF NOT EXISTS atende (
-  id_medico INT NOT NULL,
-  id_paciente INT NOT NULL,
-  CONSTRAINT fk_medico
-    FOREIGN KEY (id_medico)
-      REFERENCES Medico(id_usuario),
-  CONSTRAINT fk_paciente
-   FOREIGN KEY (id_paciente)
-     REFERENCES Paciente(id_usuario)
+-- Criação da tabela de exames
+CREATE TABLE Exame (
+    id SERIAL PRIMARY KEY,
+    id_usuario INT NOT NULL,
+    nome_exame VARCHAR(255) NOT NULL,
+    url VARCHAR(255) NOT NULL,
+    data_submissao TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (id_usuario) REFERENCES Usuario(id)
 );

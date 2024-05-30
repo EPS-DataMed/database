@@ -1,46 +1,23 @@
--- Inserindo dados na tabela TB_Usuario
-INSERT INTO "TB_Usuario" ("nome") VALUES ('João Silva');
-INSERT INTO "TB_Usuario" ("nome") VALUES ('Maria Oliveira');
+INSERT INTO Usuario (nome_completo, email, senha, data_nascimento, sexo_biologico, formulario, status_formulario)
+VALUES
+('Maria Silva', 'maria.silva@example.com', 'senha123', '1990-05-14', 'F', '{"questao1": "resposta1"}', 'Preenchido'),
+('João Souza', 'joao.souza@example.com', 'senha123', '1985-08-21', 'M', '{"questao1": "resposta1"}', 'Em andamento'),
+('Ana Costa', 'ana.costa@example.com', 'senha123', '1992-11-30', 'F', '{"questao1": "resposta1"}', 'Não iniciado');
 
--- Inserindo dados na tabela TP_Status_Formulario
-INSERT INTO "TP_Status_Formulario" ("status_formulario") VALUES ('Em aberto');
-INSERT INTO "TP_Status_Formulario" ("status_formulario") VALUES ('Fechado');
+INSERT INTO Medico (id_usuario, crm, especialidade)
+VALUES
+(1, 'CRM123456', 'Cardiologia'),
+(2, 'CRM654321', 'Neurologia'),
+(3, 'CRM112233', 'Pediatria');
 
--- Inserindo dados na tabela TB_Paciente
-INSERT INTO "TB_Paciente" ("id_usuario", "id_status_formulario", "email", "senha", "nome", "dt_nascimento", "criado_em", "formulario")
-VALUES (1, 1, 'joao.paciente@example.com', 'senha123', 'João Silva', '1980-01-01', '2024-05-27', 'Formulário preenchido');
+INSERT INTO Dependente (id_usuario, id_dependente, confirmado)
+VALUES
+(1, 2, TRUE),
+(1, 3, FALSE),
+(2, 3, TRUE);
 
-INSERT INTO "TB_Paciente" ("id_usuario", "id_status_formulario", "email", "senha", "nome", "dt_nascimento", "criado_em", "formulario")
-VALUES (2, 2, 'maria.paciente@example.com', 'senha456', 'Maria Oliveira', '1990-02-02', '2024-05-27', 'Formulário preenchido');
-
--- Inserindo dados na tabela TB_Medico
-INSERT INTO "TB_Medico" ("id_usuario", "crm", "especialidade", "email", "senha", "nome", "dt_nascimento", "criado_em")
-VALUES (1, 'CRM123456', 'Cardiologia', 'joao.medico@example.com', 'senha123', 'João Silva', '1980-01-01', '2024-05-27');
-
-INSERT INTO "TB_Medico" ("id_usuario", "crm", "especialidade", "email", "senha", "nome", "dt_nascimento", "criado_em")
-VALUES (2, 'CRM654321', 'Neurologia', 'maria.medico@example.com', 'senha456', 'Maria Oliveira', '1990-02-02', '2024-05-27');
-
--- Inserindo dados na tabela RL_DEPENDENTE
-INSERT INTO "RL_DEPENDENTE" ("id_responsavel", "id_dependente") VALUES (1, 2);
-
--- Inserindo dados na tabela TB_Atende
-INSERT INTO "TB_Atende" ("id_medico", "id_paciente") VALUES (1, 1);
-INSERT INTO "TB_Atende" ("id_medico", "id_paciente") VALUES (2, 2);
-
--- Inserindo dados na tabela TB_Exame
-INSERT INTO "TB_Exame" ("idExame", "name", "arquivo", "date_adicao", "id_Paciente")
-VALUES (1, 'Exame de Sangue', 'exame_sangue.pdf', '2024-05-27', 1);
-
-INSERT INTO "TB_Exame" ("idExame", "name", "arquivo", "date_adicao", "id_Paciente")
-VALUES (2, 'Raio X', 'raio_x.pdf', '2024-05-27', 2);
-
--- Inserindo dados na tabela TB_Dados_Saude
-INSERT INTO "TB_Dados_Saude" ("nome") VALUES ('Pressão Arterial');
-INSERT INTO "TB_Dados_Saude" ("nome") VALUES ('Colesterol');
-
--- Inserindo dados na tabela RL_Dados_Saude_Exame
-INSERT INTO "RL_Dados_Saude_Exame" ("id_rl_dados_saude_exame", "id_Exame", "id_Dados_Saude")
-VALUES (1, 1, 1);
-
-INSERT INTO "RL_Dados_Saude_Exame" ("id_rl_dados_saude_exame", "id_Exame", "id_Dados_Saude")
-VALUES (2, 2, 2);
+INSERT INTO Exame (id_usuario, nome_exame, url)
+VALUES
+(1, 'Hemograma Completo', 'http://example.com/exames/hemograma1.pdf'),
+(2, 'Ressonância Magnética', 'http://example.com/exames/rm2.pdf'),
+(3, 'Ultrassonografia', 'http://example.com/exames/us3.pdf');
