@@ -1,5 +1,5 @@
 -- Criação da tabela de usuário
-CREATE TABLE Usuario (
+CREATE TABLE Usuarios (
     id SERIAL PRIMARY KEY,
     nome_completo VARCHAR(255) NOT NULL,
     email VARCHAR(255) UNIQUE NOT NULL,
@@ -12,7 +12,7 @@ CREATE TABLE Usuario (
 );
 
 -- Criação da tabela de médico
-CREATE TABLE Medico (
+CREATE TABLE Medicos (
     id_usuario INT PRIMARY KEY,
     crm VARCHAR(50) NOT NULL,
     especialidade VARCHAR(255) NOT NULL,
@@ -20,7 +20,7 @@ CREATE TABLE Medico (
 );
 
 -- Criação da tabela de dependentes
-CREATE TABLE Dependente (
+CREATE TABLE Dependentes (
     id_usuario INT,
     id_dependente INT,
     confirmado BOOLEAN DEFAULT FALSE,
@@ -30,7 +30,7 @@ CREATE TABLE Dependente (
 );
 
 -- Criação da tabela de exames
-CREATE TABLE Exame (
+CREATE TABLE Exames (
     id SERIAL PRIMARY KEY,
     id_usuario INT NOT NULL,
     nome_exame VARCHAR(255) NOT NULL,
