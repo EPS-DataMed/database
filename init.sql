@@ -5,7 +5,7 @@ CREATE TABLE Usuarios (
     email VARCHAR(255) UNIQUE NOT NULL,
     senha VARCHAR(255) NOT NULL,
     data_nascimento DATE NOT NULL,
-    sexo_biologico CHAR(1) CHECK (sexo_biologico IN ('M', 'F')),
+    sexo_biologico VARCHAR(1) CHECK (sexo_biologico IN ('M', 'F')),
     data_criacao TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
@@ -41,11 +41,11 @@ CREATE TABLE Exames (
 CREATE TABLE Formularios (
     id SERIAL PRIMARY KEY,
     id_usuario INT NOT NULL,
-    peso VARCHAR(255) NOT NULL,
-    altura VARCHAR(255) NOT NULL,
-    imc VARCHAR(255) NOT NULL,
-    tipo_sanguineo VARCHAR(255) NOT NULL,
-    circunferencia_abdominal VARCHAR(255) NOT NULL,
+    peso VARCHAR(255),
+    altura VARCHAR(255),
+    imc VARCHAR(255),
+    tipo_sanguineo VARCHAR(255),
+    circunferencia_abdominal VARCHAR(255),
     alergias VARCHAR(255),
     doencas VARCHAR(255),
     medicamentos VARCHAR(255),
