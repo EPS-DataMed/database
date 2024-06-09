@@ -1,68 +1,68 @@
--- Criação da tabela de usuário
-CREATE TABLE Usuarios (
+-- Creation of the Users table
+CREATE TABLE Users (
     id SERIAL PRIMARY KEY,
-    nome_completo VARCHAR(255) NOT NULL,
+    full_name VARCHAR(255) NOT NULL,
     email VARCHAR(255) UNIQUE NOT NULL,
-    senha VARCHAR(255) NOT NULL,
-    data_nascimento DATE NOT NULL,
-    sexo_biologico VARCHAR(1) CHECK (sexo_biologico IN ('M', 'F')),
-    data_criacao TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+    password VARCHAR(255) NOT NULL,
+    birth_date DATE NOT NULL,
+    biological_sex VARCHAR(1) CHECK (biological_sex IN ('M', 'F')),
+    creation_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
--- Criação da tabela de médico
-CREATE TABLE Medicos (
-    id_usuario INT PRIMARY KEY,
+-- Creation of the Doctors table
+CREATE TABLE Doctors (
+    user_id INT PRIMARY KEY,
     crm VARCHAR(50) NOT NULL,
-    especialidade VARCHAR(255) NOT NULL,
-    FOREIGN KEY (id_usuario) REFERENCES Usuarios(id)
+    specialty VARCHAR(255) NOT NULL,
+    FOREIGN KEY (user_id) REFERENCES Users(id)
 );
 
--- Criação da tabela de dependentes
-CREATE TABLE Dependentes (
-    id_usuario INT,
-    id_dependente INT,
-    confirmado BOOLEAN DEFAULT FALSE,
-    PRIMARY KEY (id_usuario, id_dependente),
-    FOREIGN KEY (id_usuario) REFERENCES Usuarios(id),
-    FOREIGN KEY (id_dependente) REFERENCES Usuarios(id)
+-- Creation of the Dependents table
+CREATE TABLE Dependents (
+    user_id INT,
+    dependent_id INT,
+    confirmed BOOLEAN DEFAULT FALSE,
+    PRIMARY KEY (user_id, dependent_id),
+    FOREIGN KEY (user_id) REFERENCES Users(id),
+    FOREIGN KEY (dependent_id) REFERENCES Users(id)
 );
 
--- Criação da tabela de exames
-CREATE TABLE Exames (
+-- Creation of the Exams table
+CREATE TABLE Exams (
     id SERIAL PRIMARY KEY,
-    id_usuario INT NOT NULL,
-    nome_exame VARCHAR(255) NOT NULL,
+    user_id INT NOT NULL,
+    exam_name VARCHAR(255) NOT NULL,
     url VARCHAR(255) NOT NULL,
-    data_submissao TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    FOREIGN KEY (id_usuario) REFERENCES Usuarios(id)
+    submission_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (user_id) REFERENCES Users(id)
 );
 
--- Criação da tabela de formulários
-CREATE TABLE Formularios (
+-- Creation of the Forms table
+CREATE TABLE Forms (
     id SERIAL PRIMARY KEY,
-    id_usuario INT NOT NULL,
-    peso VARCHAR(255),
-    altura VARCHAR(255),
-    imc VARCHAR(255),
-    tipo_sanguineo VARCHAR(255),
-    circunferencia_abdominal VARCHAR(255),
-    alergias VARCHAR(255),
-    doencas VARCHAR(255),
-    medicamentos VARCHAR(255),
-    historico_familiar VARCHAR(255),
-    notas_importantes VARCHAR(255),
-    relatorios_imagens VARCHAR(255),
-    status_formulario VARCHAR(20) CHECK (status_formulario IN ('Preenchido', 'Em andamento', 'Não iniciado')) DEFAULT 'Não iniciado',
-    FOREIGN KEY (id_usuario) REFERENCES Usuarios(id)
+    user_id INT NOT NULL,
+    weight VARCHAR(255),
+    height VARCHAR(255),
+    bmi VARCHAR(255),
+    blood_type VARCHAR(255),
+    abdominal_circumference VARCHAR(255),
+    allergies VARCHAR(255),
+    diseases VARCHAR(255),
+    medications VARCHAR(255),
+    family_history VARCHAR(255),
+    important_notes VARCHAR(255),
+    reports_images VARCHAR(255),
+    form_status VARCHAR(20) CHECK (form_status IN ('Filled', 'In progress', 'Not started')) DEFAULT 'Not started',
+    FOREIGN KEY (user_id) REFERENCES Users(id)
 );
 
--- Criação da tabela para dados de saúde derivados de exames
-CREATE TABLE DadosSaudeDerivados (
+-- Creation of the DerivedHealthData table
+CREATE TABLE DerivedHealthData (
     id SERIAL PRIMARY KEY,
-    id_formulario INT NOT NULL,
-    id_exame INT NOT NULL,
-    nome VARCHAR(255) NOT NULL,
-    valor VARCHAR(255) NOT NULL,
-    FOREIGN KEY (id_formulario) REFERENCES Formularios(id),
-    FOREIGN KEY (id_exame) REFERENCES Exames(id)
+    form_id INT NOT NULL,
+    exam_id INT NOT NULL,
+    name VARCHAR(255) NOT NULL,
+    value VARCHAR(255) NOT NULL,
+    FOREIGN KEY (form_id) REFERENCES Forms(id),
+    FOREIGN KEY (exam_id) REFERENCES Exams(id)
 );
