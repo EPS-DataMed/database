@@ -27,11 +27,11 @@ CREATE TABLE Dependents (
     FOREIGN KEY (dependent_id) REFERENCES Users(id)
 );
 
--- Creation of the Exams table
-CREATE TABLE Exams (
+-- Creation of the Tests table
+CREATE TABLE Tests (
     id SERIAL PRIMARY KEY,
     user_id INT NOT NULL,
-    exam_name VARCHAR(255) NOT NULL,
+    test_name VARCHAR(255) NOT NULL,
     url VARCHAR(255) NOT NULL,
     submission_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     FOREIGN KEY (user_id) REFERENCES Users(id)
@@ -51,7 +51,7 @@ CREATE TABLE Forms (
     medications VARCHAR(255),
     family_history VARCHAR(255),
     important_notes VARCHAR(255),
-    reports_images VARCHAR(255),
+    images_reports VARCHAR(255),
     form_status VARCHAR(20) CHECK (form_status IN ('Filled', 'In progress', 'Not started')) DEFAULT 'Not started',
     FOREIGN KEY (user_id) REFERENCES Users(id)
 );
@@ -60,9 +60,9 @@ CREATE TABLE Forms (
 CREATE TABLE DerivedHealthData (
     id SERIAL PRIMARY KEY,
     form_id INT NOT NULL,
-    exam_id INT NOT NULL,
+    test_id INT NOT NULL,
     name VARCHAR(255) NOT NULL,
     value VARCHAR(255) NOT NULL,
     FOREIGN KEY (form_id) REFERENCES Forms(id),
-    FOREIGN KEY (exam_id) REFERENCES Exams(id)
+    FOREIGN KEY (test_id) REFERENCES Tests(id)
 );

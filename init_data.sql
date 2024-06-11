@@ -16,19 +16,19 @@ VALUES
 (1, 3, FALSE),
 (2, 3, TRUE);
 
-INSERT INTO Exams (user_id, exam_name, url)
+INSERT INTO Tests (user_id, test_name, url)
 VALUES 
 (1, 'Complete Blood Count', 'http://example.com/complete_blood_count1.pdf'),
 (2, 'X-Ray', 'http://example.com/xray1.pdf'),
 (3, 'Ultrasound', 'http://example.com/ultrasound1.pdf');
 
-INSERT INTO Forms (user_id, weight, height, bmi, blood_type, abdominal_circumference, allergies, diseases, medications, family_history, important_notes, reports_images, form_status)
+INSERT INTO Forms (user_id, weight, height, bmi, blood_type, abdominal_circumference, allergies, diseases, medications, family_history, important_notes, images_reports, form_status)
 VALUES 
 (1, '70kg', '1.75m', '22.9', 'O+', '85cm', 'None', 'None', 'None', 'Diabetes history', 'None', 'http://example.com/image1.pdf', 'Filled'),
 (2, '60kg', '1.65m', '22.0', 'A+', '80cm', 'None', 'None', 'None', 'Hypertension history', 'None', 'http://example.com/image2.pdf', 'In progress'),
 (3, '90kg', '1.80m', '27.8', 'B+', '90cm', 'Pollen allergy', 'Asthma', 'Albuterol', 'Asthma history', 'Needs follow-up', 'http://example.com/image3.pdf', 'Not started');
 
-INSERT INTO DerivedHealthData (form_id, exam_id, name, value)
+INSERT INTO DerivedHealthData (form_id, test_id, name, value)
 VALUES 
 (1, 1, 'hemoglobin', '14'),
 (2, 2, 'ast', '20'),
