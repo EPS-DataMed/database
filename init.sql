@@ -32,7 +32,7 @@ CREATE TABLE Tests (
     id SERIAL PRIMARY KEY,
     user_id INT NOT NULL,
     test_name VARCHAR(255) NOT NULL,
-    url VARCHAR(255) NOT NULL,
+    url VARCHAR(400) NOT NULL,
     submission_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     FOREIGN KEY (user_id) REFERENCES Users(id)
 );
