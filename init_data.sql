@@ -22,5 +22,5 @@ INSERT INTO Forms (user_id, weight, height, bmi, blood_type, abdominal_circumfer
 (2, '60kg', '160cm', '23.4', 'A+', '70cm', 'Peanuts', 'Asthma', 'Inhaler', 'No history', 'N/A', 'http://example.com/report2', 'In progress');
 
 INSERT INTO DerivedHealthData (form_id, test_id, name, value) VALUES
-(1, 1, 'Urea', '40mg/dL'),
-(2, 2, 'Creatinine', '0.91mg/dL');
+(1, 1, 'hemoglobin', '14.0g/dL'),
+(2, 2, 'Urea', '40mg/dL');

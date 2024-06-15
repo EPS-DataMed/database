@@ -1,4 +1,3 @@
--- Creation of the Users table
 CREATE TABLE Users (
     id SERIAL PRIMARY KEY,
     full_name VARCHAR(255) NOT NULL,
@@ -9,7 +8,6 @@ CREATE TABLE Users (
     creation_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
--- Creation of the Doctors table
 CREATE TABLE Doctors (
     user_id INT PRIMARY KEY,
     crm VARCHAR(50) NOT NULL,
@@ -17,7 +15,6 @@ CREATE TABLE Doctors (
     FOREIGN KEY (user_id) REFERENCES Users(id)
 );
 
--- Creation of the Dependents table
 CREATE TABLE Dependents (
     user_id INT,
     dependent_id INT,
@@ -27,7 +24,6 @@ CREATE TABLE Dependents (
     FOREIGN KEY (dependent_id) REFERENCES Users(id)
 );
 
--- Creation of the Tests table
 CREATE TABLE Tests (
     id SERIAL PRIMARY KEY,
     user_id INT NOT NULL,
@@ -37,7 +33,6 @@ CREATE TABLE Tests (
     FOREIGN KEY (user_id) REFERENCES Users(id)
 );
 
--- Creation of the Forms table
 CREATE TABLE Forms (
     id SERIAL PRIMARY KEY,
     user_id INT NOT NULL,
@@ -56,7 +51,6 @@ CREATE TABLE Forms (
     FOREIGN KEY (user_id) REFERENCES Users(id)
 );
 
--- Creation of the DerivedHealthData table
 CREATE TABLE DerivedHealthData (
     id SERIAL PRIMARY KEY,
     form_id INT NOT NULL,
