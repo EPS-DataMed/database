@@ -17,10 +17,10 @@ INSERT INTO Tests (user_id, test_name, url) VALUES
 (2, 'Urea Test', 'http://example.com/test2'),
 (3, 'Creatinine Test', 'http://example.com/test3');
 
-INSERT INTO Forms (user_id, weight, height, bmi, blood_type, abdominal_circumference, allergies, diseases, medications, family_history, important_notes, images_reports, form_status) VALUES
-(1, '70kg', '170cm', '24.2', 'O+', '80cm', 'None', 'Hypertension', 'Aspirin', 'Heart disease in family', 'N/A', 'http://example.com/report1', 'Filled'),
-(2, '60kg', '160cm', '23.4', 'A+', '70cm', 'Peanuts', 'Asthma', 'Inhaler', 'No history', 'N/A', 'http://example.com/report2', 'In progress');
+INSERT INTO Forms (user_id, weight, height, bmi, blood_type, abdominal_circumference, allergies, diseases, medications, family_history, important_notes, images_reports, form_status, red_blood_cell, hemoglobin, hematocrit, glycated_hemoglobin, ast, alt, urea, creatinine) VALUES
+(1, '70kg', '170cm', '24.2', 'O+', '80cm', 'None', 'Hypertension', 'Aspirin', 'Heart disease in family', 'N/A', 'http://example.com/report1', 'Filled', '4.5', '14.0', '42', '5.7', '20', '30', '20', '1.0'),
+(2, '60kg', '160cm', '23.4', 'A+', '70cm', 'Peanuts', 'Asthma', 'Inhaler', 'No history', 'N/A', 'http://example.com/report2', 'In progress', '4.7', '13.5', '40', '5.5', '22', '32', '18', '0.9');
 
 INSERT INTO DerivedHealthData (form_id, test_id, name, value) VALUES
-(1, 1, 'hemoglobin', '14.0g/dL'),
-(2, 2, 'Urea', '40mg/dL');
+(1, 1, 'hemoglobin', '14.0'),
+(2, 2, 'urea', '40');

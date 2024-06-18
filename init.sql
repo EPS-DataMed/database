@@ -1,8 +1,15 @@
+DROP TABLE IF EXISTS DerivedHealthData CASCADE;
+DROP TABLE IF EXISTS Forms CASCADE;
+DROP TABLE IF EXISTS Tests CASCADE;
+DROP TABLE IF EXISTS Dependents CASCADE;
+DROP TABLE IF EXISTS Doctors CASCADE;
+DROP TABLE IF EXISTS Users CASCADE;
+
 CREATE TABLE Users (
     id SERIAL PRIMARY KEY,
     full_name VARCHAR(255) NOT NULL,
     email VARCHAR(255) UNIQUE NOT NULL,
-    password VARCHAR(255) NOT NULL,
+    password VARCHAR(2048) NOT NULL,
     birth_date DATE NOT NULL,
     biological_sex VARCHAR(1) CHECK (biological_sex IN ('M', 'F')),
     creation_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP
@@ -29,6 +36,7 @@ CREATE TABLE Tests (
     user_id INT NOT NULL,
     test_name VARCHAR(255) NOT NULL,
     url VARCHAR(400) NOT NULL,
+    test_date TIMESTAMP DEFAULT NULL,
     submission_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     FOREIGN KEY (user_id) REFERENCES Users(id)
 );
@@ -48,6 +56,14 @@ CREATE TABLE Forms (
     important_notes VARCHAR(255),
     images_reports VARCHAR(255),
     form_status VARCHAR(20) CHECK (form_status IN ('Filled', 'In progress', 'Not started')) DEFAULT 'Not started',
+    red_blood_cell VARCHAR(255),
+    hemoglobin VARCHAR(255),
+    hematocrit VARCHAR(255),
+    glycated_hemoglobin VARCHAR(255),
+    ast VARCHAR(255),
+    alt VARCHAR(255),
+    urea VARCHAR(255),
+    creatinine VARCHAR(255),
     FOREIGN KEY (user_id) REFERENCES Users(id)
 );
 
