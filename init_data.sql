@@ -23,4 +23,4 @@ INSERT INTO Forms (user_id, weight, height, bmi, blood_type, abdominal_circumfer
 
 INSERT INTO DerivedHealthData (form_id, test_id, name, value) VALUES
 (1, 1, 'hemoglobin', '14.0g/dL'),
-(2, 2, 'Urea', '40mg/dL');
+(2, 2, 'urea', '40mg/dL');
