@@ -1,5 +1,5 @@
 # Use the official PostgreSQL image from the Docker Hub
-FROM postgres:13
+# FROM postgres:13
 
 # Set environment variables
 # ENV POSTGRES_DB mydatabase
