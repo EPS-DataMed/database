@@ -1,0 +1,5 @@
+# Ignore the following files and directories
+.git
+.github
+*.log
+.DS_Store

@@ -1,5 +1,6 @@
 
 # Database
+[![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=EPS-DataMed_database&metric=alert_status)](https://sonarcloud.io/summary/new_code?id=EPS-DataMed_database)
 
 ## Visão Geral
 O projeto DataMed é desenvolvido para gerenciar dados médicos, incluindo perfis de usuários, médicos, dependentes, testes médicos, formulários e dados de saúde derivados. O projeto utiliza um banco de dados PostgreSQL para armazenamento de dados e GitHub Actions para integração contínua e implantação.
