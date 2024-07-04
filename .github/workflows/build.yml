@@ -28,17 +28,17 @@ jobs:
     steps:
       - uses: actions/checkout@v3
       
-      - name: Set up PostgreSQL
-        uses: ankane/setup-postgres@v1
+      - name: Set up PostgreSQL client
+        run: sudo apt-get install -y postgresql-client
 
       - name: Execute init.sql
         env:
-          DATABASE_URL: ${{ secrets.DATABASE_URL }}
+          PGPASSWORD: ${{ secrets.DATABASE_PASSWORD }}
         run: |
-          psql $DATABASE_URL -f init.sql
+          psql -h ${{ secrets.DATABASE_HOST }} -U ${{ secrets.DATABASE_USER }} -d ${{ secrets.DATABASE_NAME }} -f init.sql
 
       - name: Execute init_data.sql
         env:
-          DATABASE_URL: ${{ secrets.DATABASE_URL }}
+          PGPASSWORD: ${{ secrets.DATABASE_PASSWORD }}
         run: |
-          psql $DATABASE_URL -f init_data.sql
+          psql -h ${{ secrets.DATABASE_HOST }} -U ${{ secrets.DATABASE_USER }} -d ${{ secrets.DATABASE_NAME }} -f init_data.sql
