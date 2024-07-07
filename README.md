@@ -8,7 +8,7 @@ O projeto DataMed é desenvolvido para gerenciar dados médicos, incluindo perfi
 
 ## Execução local do banco de dados com Docker
 
-## Pré-requisitos
+### Pré-requisitos
 
  - Docker
  - Docker Compose
@@ -35,4 +35,4 @@ Assim, a URL de conexão para um banco de dados PostgreSQL é `postgresql://data
 
 ## Licença
 
-Este projeto está licenciado sob a [MIT License](https://www.mit.edu/~amini/LICENSE.md).
+Este projeto está licenciado sob a [MIT License](./LICENSE).
