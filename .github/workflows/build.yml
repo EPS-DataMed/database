@@ -5,7 +5,6 @@ on:
       - main
   pull_request:
     types: [opened, synchronize, reopened]
-
 jobs:
   sonarcloud:
     name: SonarCloud
@@ -19,24 +18,19 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GIT_TOKEN }}  # Needed to get PR information, if any
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
-
   deploy:
     name: Deploy to PostgreSQL
     runs-on: ubuntu-latest
     needs: sonarcloud  # Ensures the deploy job runs after the sonarcloud job
-
     steps:
       - uses: actions/checkout@v3
-      
       - name: Set up PostgreSQL client
         run: sudo apt-get install -y postgresql-client
-
       - name: Execute init.sql
         env:
           PGPASSWORD: ${{ secrets.DATABASE_PASSWORD }}
         run: |
           psql -h ${{ secrets.DATABASE_HOST }} -U ${{ secrets.DATABASE_USER }} -d ${{ secrets.DATABASE_NAME }} -f init.sql
-
       - name: Execute init_data.sql
         env:
           PGPASSWORD: ${{ secrets.DATABASE_PASSWORD }}

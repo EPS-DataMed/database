@@ -2,42 +2,37 @@
 # Database
 [![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=EPS-DataMed_database&metric=alert_status)](https://sonarcloud.io/summary/new_code?id=EPS-DataMed_database)
 
-## Visão Geral
-O projeto DataMed é desenvolvido para gerenciar dados médicos, incluindo perfis de usuários, médicos, dependentes, testes médicos, formulários e dados de saúde derivados. O projeto utiliza um banco de dados PostgreSQL para armazenamento de dados e GitHub Actions para integração contínua e implantação.
+## Descrição do Projeto
 
-## Estrutura do Projeto
-Este README se concentra nos arquivos principais para inicialização do banco de dados, conforme mostrado na imagem:
+O projeto DataMed é desenvolvido para gerenciar dados médicos, incluindo perfis de usuários, médicos, dependentes, testes médicos, formulários e dados de saúde derivados dos testes médicos. O projeto utiliza um banco de dados PostgreSQL para armazenamento de dados e GitHub Actions para realização da Integração Contínua e Entrega Contínua (CI/CD).
 
-```
-init_data.sql  # Script SQL para popular o banco de dados com dados iniciais
-init.sql       # Script SQL para criar o esquema do banco de dados
-```
+## Execução local do banco de dados com Docker
 
-### Arquivos
+### Pré-requisitos
 
-#### `init.sql`
-O arquivo `init.sql` contém as instruções SQL para criar as tabelas necessárias no banco de dados. Este script verifica a existência das tabelas antes de criá-las, garantindo que não haverá conflitos com tabelas já existentes.
+ - Docker
+ - Docker Compose
 
-#### `init_data.sql`
-O arquivo `init_data.sql` contém as instruções SQL para popular o banco de dados com dados iniciais. Este script insere registros nas tabelas criadas para garantir que o sistema tenha dados básicos para funcionar.
+1. **Clone o repositório**
 
-## Instruções para Uso
-
-### Executando os Scripts SQL
-Para executar os scripts SQL, você pode usar um cliente PostgreSQL como o `psql`. Certifique-se de ter as credenciais corretas e acesso ao banco de dados.
-
-1. **Executar o `init.sql`**:
-   ```sh
-   psql -h <host> -U <usuario> -d <database> -f init.sql
+   ```bash
+   git clone <URL_DO_REPOSITORIO>
+   cd database
    ```
 
-2. **Executar o `init_data.sql`**:
-   ```sh
-   psql -h <host> -U <usuario> -d <database> -f init_data.sql
-   ```
+2. **Executar o container**
+    ```bash
+    docker-compose up
+    ```
+Isso inicializará um banco de dados PostgreSQL para desenvolvimento com as seguintes configurações:
+- Nome de usuário: datamed_user
+- Senha: datamed_password
+- Localização do banco: localhost (indicando que o banco de dados está localizado na máquina local (localhost))
+- Porta: 5432 (porta onde o PostgreSQL está ouvindo conexões)
+- Nome do banco: datamed_db
 
-Substitua `<host>`, `<usuario>`, e `<database>` pelas informações do seu ambiente.
+Assim, a URL de conexão para um banco de dados PostgreSQL é `postgresql://datamed_user:datamed_password@localhost:5432/datamed_db`.
 
-## Considerações
-- **Segurança**: Certifique-se de que as credenciais do banco de dados estão seguras e não são expostas em locais públicos.
-- **Ambiente de Produção**: Tenha cuidado ao executar esses scripts em um ambiente de produção para evitar perda de dados.
+## Licença
+
+Este projeto está licenciado sob a [MIT License](./LICENSE).
